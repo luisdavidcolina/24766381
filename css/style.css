@@ -251,3 +251,21 @@ section {
     letter-spacing: 0.5px;
     color: #4A90E2;
 }
+
+
+.alumno-card {
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.alumno-card:hover {
+    transform: scale(1.05) rotate(4deg);
+
+    background-color: #99c5dd;
+
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.alumno-card:hover img,
+.alumno-card:hover .nombre {
+    transform: scale(1.05);
+}
