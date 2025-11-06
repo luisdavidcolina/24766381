@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <link rel="icon" href="https://www.ciens.ucv.ve/wp-content/uploads/2025/07/cropped-logonuevo-32x32.png"
+        sizes="32x32">
+
+    <link rel="icon" href="https://www.ciens.ucv.ve/wp-content/uploads/2025/07/cropped-logonuevo-192x192.png"
+        sizes="192x192">
+
+    <title>Luisdavid Colina</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Helvetica Neue", Arial, sans-serif;
+            background: #fff;
+            padding: 24px;
+        }
+
+        .perfil-contenedor {
+            display: flex;
+            max-width: 900px;
+            position: relative;
+        }
+
+        .perfil-imagen {
+            width: 220px;
+            height: auto;
+            border-radius: 20px 0 0 0;
+            overflow: hidden;
+            margin-right: 18px;
+            flex-shrink: 0;
+        }
+
+        .perfil-imagen img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .perfil-datos {
+            flex: 1;
+            background: #fff;
+            border: 1px solid #999;
+            box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.25);
+            padding: 18px;
+        }
+
+        .perfil-nombre {
+            color: #f59c00;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .perfil-descripcion {
+            font-style: italic;
+            font-family: Georgia, "Times New Roman", serif;
+            margin-bottom: 14px;
+            line-height: 1.3;
+        }
+
+        .atributos {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 6px 12px;
+            align-items: start;
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+
+        .atributos dt {
+            font-weight: 400;
+        }
+
+        .atributos dd {
+            margin-left: 0;
+            font-weight: 400;
+        }
+
+        body>article>div.perfil-datos>dl>dt:nth-child(9) {
+            font-weight: 700;
+        }
+
+        body>article>div.perfil-datos>dl>dd.lenguajes {
+            font-weight: 700;
+        }
+
+        .lenguajes {
+            font-weight: 700;
+            color: #000;
+        }
+
+        .contacto {
+            margin-top: 8px;
+            font-size: 15px;
+        }
+
+        .contacto a {
+            color: orange;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .contacto a:active {
+            color: red;
+        }
+
+        .contacto a:visited {
+            color: #cc7f00;
+        }
+    </style>
+</head>
+
+<body>
+
+    <article class="perfil-contenedor" role="article" aria-label="Perfil de Luisdavid Colina">
+
+        <div class="perfil-imagen">
+            <img src="24766381.jpg" alt="Foto de Luisdavid Colina" />
+        </div>
+
+        <div class="perfil-datos">
+            <h1 class="perfil-nombre">Luisdavid Colina</h1>
+
+            <p class="perfil-descripcion">
+                Soy estudiante de Computación en la UCV. Me gusta el arte y la tecnología. Actualmente trabajo brindando
+                soluciones ti en el área de hospitalidad.
+            </p>
+
+            <dl class="atributos">
+                <dt>Mi color favorito es:</dt>
+                <dd>Verde</dd>
+                <dt>Mi libro favorito es:</dt>
+                <dd>Harry Potter y el Prisionero de Azkaban</dd>
+                <dt>Estilo de música preferida es:</dt>
+                <dd>Escucho de todo literalmente</dd>
+                <dt>Mis Videojuegos favoritos son:</dt>
+                <dd>Pokémon HeartGold</dd>
+                <dt>Lenguajes aprendidos:</dt>
+                <dd class="lenguajes">JavaScript, Python, PHP, Java, C++</dd>
+            </dl>
+
+            <p class="contacto">
+                Si necesitan comunicarse conmigo me pueden escribir a:
+                <a href="mailto:luisdavid.colina@gmail.com">luisdavid.colina@gmail.com</a>
+            </p>
+        </div>
+
+    </article>
+</body>
+
+</html>
