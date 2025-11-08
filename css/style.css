@@ -10,12 +10,16 @@
     position: relative;
 }
 
+article {
+    margin: 20px
+}
+
 .perfil-imagen {
     width: 220px;
     height: auto;
     border-radius: 20px 0 0 0;
     overflow: hidden;
-    margin-right: 18px;
+    margin-right: 5px;
     flex-shrink: 0;
 }
 
