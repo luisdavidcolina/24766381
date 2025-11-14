@@ -31,7 +31,11 @@
 
             <li class="alumno-card">
                 <a href="perfil.html">
-                    <img src="24766381.jpg" alt="Foto de Luisdavid Colina" />
+                    <picture>
+                        <source media="(min-width: 1025px)" srcset="24766381Grande.jpg">
+                        <source media="(max-width: 1024px)" srcset="24766381Pequena.jpg">
+                        <img src="24766381Pequena.jpg" alt="Foto de Luisdavid Colina" />
+                    </picture>
                     <div class="nombre">Luisdavid Colina</div>
                 </a>
             </li>
