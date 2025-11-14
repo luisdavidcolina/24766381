@@ -210,6 +210,7 @@ section {
 }
 
 .atributos {
+    list-style: none;
     display: grid;
     grid-template-columns: auto 1fr;
     gap: 0.375rem 0.75rem;
@@ -218,13 +219,25 @@ section {
     font-size: 0.9375rem;
 }
 
-.atributos dt {
+.atributos li {
+    display: contents;
+}
+
+.atributos strong {
     font-weight: 400;
 }
 
-.atributos dd {
-    margin-left: 0;
+.atributos span {
     font-weight: 400;
+}
+
+.atributos .lenguajes-item strong {
+    font-weight: 700;
+}
+
+.atributos .lenguajes {
+    font-weight: 700;
+    color: #000;
 }
 
 body>article>div.perfil-datos>dl>dt:nth-child(9) {
@@ -259,33 +272,21 @@ body>article>div.perfil-datos>dl>dd.lenguajes {
     color: #cc7f00;
 }
 
-@media (min-width: 1025px) and (max-width: 1200px) {
-
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-
+@media (max-width: 1024px) {
     .search-form input[type="text"] {
         width: 120px;
     }
-    
+
     .perfil-imagen {
         width: 180px;
     }
-
-    .alumno-card img,
-    .alumno-card picture {
-        width: 70px;
-        height: 100px;
-        border-radius: 0;
-    }
 }
 
-@media (min-width: 481px) and (max-width: 768px) {
-    
+@media (max-width: 768px) {
     .nav-left {
         font-size: 1.25rem;
     }
+
     .search-form input[type="text"] {
         width: 100px;
     }
@@ -293,9 +294,11 @@ body>article>div.perfil-datos>dl>dd.lenguajes {
     .perfil-contenedor {
         margin: 1.5rem auto;
     }
+
     .perfil-imagen {
         width: 150px;
     }
+
     .perfil-nombre {
         font-size: 1.75rem;
     }
@@ -304,34 +307,40 @@ body>article>div.perfil-datos>dl>dd.lenguajes {
     .alumno-card picture {
         width: 80px;
         height: 120px;
-        border-radius: 0; 
+        border-radius: 0;
     }
 }
 
-@media (min-width: 320px) and (max-width: 480px) {
-    
+@media (max-width: 480px) {
     nav {
         flex-direction: column;
         align-items: stretch;
         border: none;
     }
-    .nav-left, .nav-user, .search-form {
+
+    .nav-left,
+    .nav-user,
+    .search-form {
         width: 100%;
         border-right: none !important;
         justify-content: center;
         padding: 0.5rem 0.75rem;
     }
+
     .nav-left {
         border-bottom: 1px solid #fff;
         font-size: 1.5rem;
     }
+
     .nav-user {
         font-size: 1.25rem;
         border-bottom: 1px solid #fff;
     }
+
     .search-form {
         padding-right: 0.75rem;
     }
+
     .search-form input[type="text"] {
         flex-grow: 1;
         width: auto;
@@ -344,6 +353,7 @@ body>article>div.perfil-datos>dl>dd.lenguajes {
         box-shadow: none;
         max-width: 100%;
     }
+
     .perfil-imagen {
         width: 100%;
         height: auto;
@@ -351,11 +361,13 @@ body>article>div.perfil-datos>dl>dd.lenguajes {
         margin-bottom: 1rem;
         text-align: center;
     }
+
     .perfil-datos {
         border: 1px solid #999;
         box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.25);
         margin-left: 0;
     }
+
     .perfil-nombre {
         font-size: 1.5rem;
     }
@@ -365,13 +377,6 @@ body>article>div.perfil-datos>dl>dd.lenguajes {
         width: auto;
         display: block;
         margin: 0.5rem auto;
-    }
-    
-    .alumno-card img,
-    .alumno-card picture {
-        width: 80px;
-        height: 120px;
-        border-radius: 0; 
-        margin-bottom: 0.75rem;
+        height: auto;
     }
 }
