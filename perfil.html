@@ -13,22 +13,26 @@
 
     <title>Luisdavid Colina</title>
     <link rel="stylesheet" href="css/style.css">
-    <style> </style>
 </head>
 
 <body>
 
     <article class="perfil-contenedor" role="article" aria-label="Perfil de Luisdavid Colina">
 
-        <div class="perfil-imagen">
-            <img src="24766381.jpg" alt="Foto de Luisdavid Colina" />
-        </div>
-
-        <div class="perfil-datos">
+    <div class="perfil-imagen">
+        <picture>
+            <source media="(min-width:1025px)" srcset="24766381Grande.jpg">
+            <source media="(max-width:1024px)" srcset="24766381Pequena.jpg">
+            <img src="24766381Pequena.jpg" alt="Foto de perfil">
+        </picture>
+    </div>
+    
+    <div class="perfil-datos">
             <h1 class="perfil-nombre">Luisdavid Colina</h1>
 
             <p class="perfil-descripcion">
-                Soy estudiante de Computación en la UCV. Me gusta el arte y la tecnología. Actualmente trabajo brindando
+                Soy estudiante de Computación en la UCV. Me gusta el arte y la tecnología. Actualmente trabajo
+                brindando
                 soluciones ti en el área de hospitalidad.
             </p>
 
