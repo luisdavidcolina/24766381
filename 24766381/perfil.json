@@ -1,0 +1,13 @@
+const perfil = {
+    "nombre": "Luisdavid Colina",
+    "descripcion": "Soy estudiante de Computación en la UCV. Me gusta el arte y la tecnología. Actualmente trabajo brindando soluciones TI en el área de hostelería.",
+    "color": "Verde",
+    "libro": ["Harry Potter y el Prisionero de Azkaban"],
+    "musica": ["Escucho de todo literally"],
+    "video_juego": ["Pokémon HeartGold"],
+    "lenguajes": ["JavaScript","PHP", "C++","Python","Java"],
+    "email": "luisdavid.colina@gmail.com",
+    "ci": "24766381",
+    "genero": "masculino",
+    "fecha_nacimiento": "09/10/1996"
+}
