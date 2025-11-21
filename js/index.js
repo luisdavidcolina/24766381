@@ -1,106 +1,106 @@
-document.addEventListener('DOMContentLoaded', () => {
-    if (typeof config !== 'undefined') {
-        cargarConfiguracion(config);
-    }
-
+window.onload = function () {
     const params = new URLSearchParams(window.location.search);
-    const ci = params.get('ci');
+    const lang = params.get('lang');
 
-    if (ci) {
-        if (typeof perfiles !== 'undefined') {
-            const datosBasicos = perfiles.find(p => p.ci === ci);
-            if (datosBasicos) {
-                actualizarImagen(datosBasicos);
-            }
+    if (!lang) {
+        let url = window.location.href;
+        url += (url.indexOf('?') > -1 ? '&' : '?') + 'lang=ES';
+        window.location.href = url;
+        return;
+    }
+
+    const configScript = document.createElement('script');
+    configScript.src = 'conf/config' + lang.toUpperCase() + '.json';
+
+    configScript.onload = function () {
+        if (typeof config === 'undefined') return;
+
+        const navLeft = document.querySelector('.nav-left');
+        if (navLeft && config.sitio) navLeft.innerHTML = config.sitio[0] + '<span>' + config.sitio[1] + '</span> ' + config.sitio[2];
+
+        const navUser = document.querySelector('.nav-user');
+        if (navUser && config.saludo) {
+            const userName = (typeof perfiles !== 'undefined' && perfiles[0]) ? perfiles[0].nombre : 'Luisdavid Colina';
+            navUser.textContent = config.saludo + ', ' + userName;
         }
 
-        const script = document.createElement('script');
-        script.src = `${ci}/perfil.json`;
-        script.onload = () => {
-            if (typeof perfil !== 'undefined') {
-                llenarDatosTexto(perfil);
-            }
-        };
-        document.head.appendChild(script);
+        const footer = document.querySelector('footer');
+        if (footer && config.copyRight) footer.textContent = config.copyRight;
 
-    } else if (typeof perfiles !== 'undefined') {
-        const grid = document.querySelector('.alumnos-grid');
-        if (grid) {
-            cargarGridEstudiantes(perfiles, grid);
+        const btnBuscar = document.querySelector('.search-form button');
+        if (btnBuscar && config.buscar) btnBuscar.textContent = config.buscar;
+
+        const inputNombre = document.querySelector('.search-form input[name="nombre"]');
+        if (inputNombre && config.nombre) inputNombre.placeholder = config.nombre + '...';
+
+        const labels = document.querySelectorAll('.atributos li strong');
+        if (labels.length > 0) {
+            if (config.color) labels[0].textContent = config.color;
+            if (config.libro) labels[1].textContent = config.libro;
+            if (config.musica) labels[2].textContent = config.musica;
+            if (config.video_juego) labels[3].textContent = config.video_juego;
+            if (config.lenguajes) labels[4].textContent = config.lenguajes;
         }
-    }
-});
 
-function cargarConfiguracion(data) {
-    const navLeft = document.querySelector('.nav-left');
-    if (navLeft && data.sitio) navLeft.innerHTML = `${data.sitio[0]}<span>${data.sitio[1]}</span> ${data.sitio[2]}`;
+        const ci = params.get('ci');
 
-    const footer = document.querySelector('footer');
-    if (footer && data.copyRight) footer.textContent = data.copyRight;
+        if (ci) {
+            if (typeof perfiles !== 'undefined') {
+                const baseData = perfiles.find(function (p) { return p.ci === ci; });
+                if (baseData) {
+                    const img = document.querySelector('.perfil-imagen img');
+                    const sources = document.querySelectorAll('.perfil-imagen source');
+                    const nombre = document.querySelector('.perfil-nombre');
 
-    const btnBuscar = document.querySelector('.search-form button');
-    if (btnBuscar && data.buscar) btnBuscar.textContent = data.buscar;
+                    if (img) {
+                        img.src = baseData.imagen;
+                        img.alt = baseData.nombre;
+                    }
+                    if (sources.length > 0) {
+                        sources.forEach(function (s) { s.srcset = baseData.imagen; });
+                    }
+                    if (nombre) nombre.textContent = baseData.nombre;
+                }
+            }
 
-    const labels = document.querySelectorAll('.atributos li strong');
-    if (labels.length > 0) {
-        if (data.color) labels[0].textContent = data.color;
-        if (data.libro) labels[1].textContent = data.libro;
-        if (data.musica) labels[2].textContent = data.musica;
-        if (data.video_juego) labels[3].textContent = data.video_juego;
-        if (data.lenguajes) labels[4].textContent = data.lenguajes;
-    }
-}
+            const perfilScript = document.createElement('script');
+            perfilScript.src = ci + '/perfil.json';
 
-function actualizarImagen(datos) {
-    const img = document.querySelector('.perfil-imagen img');
-    const sources = document.querySelectorAll('.perfil-imagen source');
-    const nombre = document.querySelector('.perfil-nombre');
+            perfilScript.onload = function () {
+                if (typeof perfil !== 'undefined') {
+                    const desc = document.querySelector('.perfil-descripcion');
+                    if (desc) desc.textContent = perfil.descripcion;
 
-    if (img) {
-        img.src = datos.imagen;
-        img.alt = datos.nombre;
-    }
+                    const spans = document.querySelectorAll('.atributos li span');
+                    if (spans.length > 0) {
+                        if (perfil.color) spans[0].textContent = perfil.color;
+                        if (perfil.libro) spans[1].textContent = Array.isArray(perfil.libro) ? perfil.libro.join(', ') : perfil.libro;
+                        if (perfil.musica) spans[2].textContent = Array.isArray(perfil.musica) ? perfil.musica.join(', ') : perfil.musica;
+                        if (perfil.video_juego) spans[3].textContent = Array.isArray(perfil.video_juego) ? perfil.video_juego.join(', ') : perfil.video_juego;
+                        if (perfil.lenguajes) spans[4].textContent = Array.isArray(perfil.lenguajes) ? perfil.lenguajes.join(', ') : perfil.lenguajes;
+                    }
 
-    if (sources.length > 0) {
-        sources.forEach(s => s.srcset = datos.imagen);
-    }
+                    const emailLink = document.querySelector('.contacto a');
+                    if (emailLink && perfil.email) {
+                        emailLink.href = 'mailto:' + perfil.email;
+                        emailLink.textContent = perfil.email;
+                    }
+                }
+            };
+            document.head.appendChild(perfilScript);
 
-    if (nombre) {
-        nombre.textContent = datos.nombre;
-    }
-}
-
-function llenarDatosTexto(datos) {
-    const descripcion = document.querySelector('.perfil-descripcion');
-    if (descripcion) descripcion.textContent = datos.descripcion;
-
-    const values = document.querySelectorAll('.atributos li span');
-    if (values.length > 0) {
-        if (datos.color) values[0].textContent = datos.color;
-        if (datos.libro) values[1].textContent = Array.isArray(datos.libro) ? datos.libro.join(', ') : datos.libro;
-        if (datos.musica) values[2].textContent = Array.isArray(datos.musica) ? datos.musica.join(', ') : datos.musica;
-        if (datos.video_juego) values[3].textContent = Array.isArray(datos.video_juego) ? datos.video_juego.join(', ') : datos.video_juego;
-        if (datos.lenguajes) values[4].textContent = Array.isArray(datos.lenguajes) ? datos.lenguajes.join(', ') : datos.lenguajes;
-    }
-
-    const emailLink = document.querySelector('.contacto a');
-    if (emailLink && datos.email) {
-        emailLink.href = `mailto:${datos.email}`;
-        emailLink.textContent = datos.email;
-    }
-}
-
-function cargarGridEstudiantes(lista, grid) {
-    grid.innerHTML = '';
-    lista.forEach(estudiante => {
-        const li = document.createElement('li');
-        li.className = 'alumno-card';
-        li.innerHTML = `
-            <a href="perfil.html?ci=${estudiante.ci}">
-                <img src="${estudiante.imagen}" alt="${estudiante.nombre}" />
-                <div class="nombre">${estudiante.nombre}</div>
-            </a>
-        `;
-        grid.appendChild(li);
-    });
-}
+        } else if (typeof perfiles !== 'undefined') {
+            const grid = document.querySelector('.alumnos-grid');
+            if (grid) {
+                grid.innerHTML = '';
+                perfiles.forEach(function (p) {
+                    const li = document.createElement('li');
+                    li.className = 'alumno-card';
+                    li.innerHTML = '<a href="perfil.html?ci=' + p.ci + '&lang=' + lang + '"><img src="' + p.imagen + '" alt="' + p.nombre + '" /><div class="nombre">' + p.nombre + '</div></a>';
+                    grid.appendChild(li);
+                });
+            }
+        }
+    };
+    document.head.appendChild(configScript);
+};
