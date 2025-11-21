@@ -20,7 +20,7 @@ window.onload = function () {
 
         const navUser = document.querySelector('.nav-user');
         if (navUser && config.saludo) {
-            const userName = (typeof perfiles !== 'undefined' && perfiles[0]) ? perfiles[0].nombre : 'Luisdavid Colina';
+            const userName = (typeof perfiles !== 'undefined' && perfiles[0]) ? perfiles[0].nombre : 'Usuario';
             navUser.textContent = config.saludo + ', ' + userName;
         }
 
@@ -91,14 +91,44 @@ window.onload = function () {
 
         } else if (typeof perfiles !== 'undefined') {
             const grid = document.querySelector('.alumnos-grid');
-            if (grid) {
+            const searchForm = document.querySelector('.search-form');
+
+            function renderGrid(lista) {
                 grid.innerHTML = '';
-                perfiles.forEach(function (p) {
-                    const li = document.createElement('li');
-                    li.className = 'alumno-card';
-                    li.innerHTML = '<a href="perfil.html?ci=' + p.ci + '&lang=' + lang + '"><img src="' + p.imagen + '" alt="' + p.nombre + '" /><div class="nombre">' + p.nombre + '</div></a>';
-                    grid.appendChild(li);
-                });
+                
+                if (lista.length === 0) {
+                    const query = inputNombre ? inputNombre.value : '';
+                    grid.innerHTML = '<div style="text-align:center; padding:50px; color: #889; font-size: 1.2em;">' + 
+                                     (config.no_encontrado || 'No encontrado') + ' ' + query + 
+                                     '</div>';
+                } else {
+                    lista.forEach(function (p) {
+                        const li = document.createElement('li');
+                        li.className = 'alumno-card';
+                        li.innerHTML = '<a href="perfil.html?ci=' + p.ci + '&lang=' + lang + '"><img src="' + p.imagen + '" alt="' + p.nombre + '" /><div class="nombre">' + p.nombre + '</div></a>';
+                        grid.appendChild(li);
+                    });
+                }
+            }
+
+            if (grid) {
+                renderGrid(perfiles);
+
+                if (inputNombre) {
+                    inputNombre.addEventListener('keyup', function() {
+                        const texto = inputNombre.value.toLowerCase();
+                        const filtrados = perfiles.filter(function(p) {
+                            return p.nombre.toLowerCase().includes(texto);
+                        });
+                        renderGrid(filtrados);
+                    });
+                }
+
+                if (searchForm) {
+                    searchForm.addEventListener('submit', function(e) {
+                        e.preventDefault();
+                    });
+                }
             }
         }
     };
