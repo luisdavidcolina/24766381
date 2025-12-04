@@ -1,3 +1,10 @@
+console.log("Prueba 1 Global:", this);
+
+const testArrow = () => {
+    console.log("Prueba 2 Arrow:", this);
+};
+testArrow();
+
 window.onload = function () {
     const params = new URLSearchParams(window.location.search);
     const lang = params.get('lang');
@@ -116,6 +123,7 @@ window.onload = function () {
 
                 if (inputNombre) {
                     inputNombre.addEventListener('keyup', function() {
+                        console.log("Prueba 3 Evento:", this);
                         const texto = inputNombre.value.toLowerCase();
                         const filtrados = perfiles.filter(function(p) {
                             return p.nombre.toLowerCase().includes(texto);
